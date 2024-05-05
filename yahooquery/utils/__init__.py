@@ -1467,7 +1467,7 @@ def _get_daily_index(data, index_utc, adj_timezone):
         has_live_indice = False
     else:
         last_trade = pd.Timestamp.fromtimestamp(timestamp, tz="UTC")
-        has_live_indice = index_utc[-1] >= last_trade - pd.Timedelta(2, "S")
+        has_live_indice = index_utc[-1] >= last_trade - pd.Timedelta(2, "s")
     if has_live_indice:
         # remove it
         live_indice = index_utc[-1]
@@ -1534,7 +1534,7 @@ def _history_dataframe(data, daily, adj_timezone=True):
             cols.append(event)
 
     df = pd.DataFrame(data_dict, index=data["timestamp"])  # align all on timestamps
-    df.dropna(how="all", inplace=True)
+    df = df.dropna(how="all")
     df = df[cols]  # determine column order
 
     index = pd.to_datetime(df.index, unit="s", utc=True)
