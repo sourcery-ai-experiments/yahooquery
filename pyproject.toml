@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "yahooquery"
-version = "2.3.7"
+version = "2.3.8"
 description = "Python wrapper for an unofficial Yahoo Finance API"
 authors = ["Doug Guthrie <douglas.p.guthrie@gmail.com>"]
 documentation = "https://yahooquery.dpguthrie.com"
@@ -24,7 +24,7 @@ isort = "^5.0.0"
 flake8 = "^6.0.0"
 mypy = "^1.4.1"
 pytest-cov = "^4.1.0"
-black = "^23.7.0"
+black = "^24.3.0"
 pre-commit = "^3.3.3"
 ipython = "^8.0.0"
 mkdocs-material = "^9.1.18"

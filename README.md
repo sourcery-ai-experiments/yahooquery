@@ -3,19 +3,12 @@
 </p>
 <p align="center">
     <em>Python wrapper for an unofficial Yahoo Finance API</em>
+    <br>
+    <em>Forked by Ruin2121</em>
 </p>
 <p align="center">
-    <a href="https://travis-ci.com/dpguthrie/yahooquery" target="_blank">
-        <img src="https://travis-ci.com/dpguthrie/yahooquery.svg?branch=master" alt="Build Status">
-    </a>
-    <a href="https://codecov.io/gh/dpguthrie/yahooquery" target="_blank">
-        <img src="https://img.shields.io/codecov/c/github/dpguthrie/yahooquery" alt="Coverage">
-    </a>
-    <a href="https://pypi.org/project/yahooquery" target="_blank">
-        <img src="https://badge.fury.io/py/yahooquery.svg" alt="Package version">
-    </a>
-    <a href="https://pepy.tech/project/yahooquery" target="_blank">
-        <img src="https://pepy.tech/badge/yahooquery" alt="Downloads">
+    <a href="https://codecov.io/gh/Ruin2121/yahooquery" > 
+        <img src="https://codecov.io/gh/Ruin2121/yahooquery/graph/badge.svg?token=BWHE5GCW8T"/> 
     </a>
 </p>
 
