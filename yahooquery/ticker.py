@@ -53,7 +53,7 @@ class Ticker(_YahooFinance):
         Validate existence of symbols during instantiation
     verify: bool or str, default True, optional
         Used to verify SSL certificates for HTTPS requests.  Can either be
-        a boolean, in which case it controsl whether we verify the server's
+        a boolean, in which case it controls whether we verify the server's
         TLS certificate, or a string in which case it must be a path to a CA
         bundle to use.
 

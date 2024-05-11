@@ -572,9 +572,10 @@ class _YahooFinance(object):
         ),
     }
 
+    # pylint: disable=line-too-long
     _CONFIG = {
         "yfp_fair_value": {
-            "path": "https://query2.finance.yahoo.com/ws/value-analyzer/v1/finance/premium/valueAnalyzer/multiquote",
+            "path": "https://query2.finance.yahoo.com/ws/value-analyzer/v1/finance/premium/valueAnalyzer/multiquote",  # noqa
             "response_field": "finance",
             "query": {
                 "formatted": {"required": False, "default": False},
@@ -596,7 +597,7 @@ class _YahooFinance(object):
             },
         },
         "quoteSummary": {
-            "path": "https://query2.finance.yahoo.com/v10/finance/quoteSummary/{symbol}",
+            "path": "https://query2.finance.yahoo.com/v10/finance/quoteSummary/{symbol}",  # noqa
             "response_field": "quoteSummary",
             "query": {
                 "formatted": {"required": False, "default": False},
@@ -608,7 +609,7 @@ class _YahooFinance(object):
             },
         },
         "fundamentals": {
-            "path": "https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/{symbol}",
+            "path": "https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/{symbol}",  # noqa
             "response_field": "timeseries",
             "query": {
                 "period1": {"required": True, "default": 493590046},
@@ -623,7 +624,7 @@ class _YahooFinance(object):
             },
         },
         "fundamentals_premium": {
-            "path": "https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/premium/timeseries/{symbol}",
+            "path": "https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/premium/timeseries/{symbol}",  # noqa
             "response_field": "timeseries",
             "query": {
                 "period1": {"required": True, "default": 493590046},
@@ -716,7 +717,7 @@ class _YahooFinance(object):
             "query": {"symbol": {"required": True, "default": None}},
         },
         "recommendations": {
-            "path": "https://query2.finance.yahoo.com/v6/finance/recommendationsbysymbol/{symbol}",
+            "path": "https://query2.finance.yahoo.com/v6/finance/recommendationsbysymbol/{symbol}",  # noqa
             "response_field": "finance",
             "query": {},
         },
@@ -729,7 +730,7 @@ class _YahooFinance(object):
             },
         },
         "premium_insights": {
-            "path": "https://query2.finance.yahoo.com/ws/insights/v2/finance/premium/insights",
+            "path": "https://query2.finance.yahoo.com/ws/insights/v2/finance/premium/insights",  # noqa
             "response_field": "finance",
             "query": {
                 "symbol": {"required": True, "default": None},
@@ -737,7 +738,7 @@ class _YahooFinance(object):
             },
         },
         "screener": {
-            "path": "https://query2.finance.yahoo.com/v1/finance/screener/predefined/saved",
+            "path": "https://query2.finance.yahoo.com/v1/finance/screener/predefined/saved",  # noqa
             "response_field": "finance",
             "query": {
                 "formatted": {"required": False, "default": False},
@@ -746,7 +747,7 @@ class _YahooFinance(object):
             },
         },
         "company360": {
-            "path": "https://query2.finance.yahoo.com/ws/finance-company-360/v1/finance/premium/company360",
+            "path": "https://query2.finance.yahoo.com/ws/finance-company-360/v1/finance/premium/company360",  # noqa
             "response_field": "finance",
             "premium": True,
             "query": {
@@ -771,7 +772,7 @@ class _YahooFinance(object):
             },
         },
         "premium_portal": {
-            "path": "https://query2.finance.yahoo.com/ws/portal/v1/finance/premium/portal",
+            "path": "https://query2.finance.yahoo.com/ws/portal/v1/finance/premium/portal",  # noqa
             "response_field": "finance",
             "query": {
                 "symbols": {"required": True, "default": None},
@@ -780,7 +781,7 @@ class _YahooFinance(object):
             },
         },
         "trade_ideas": {
-            "path": "https://query2.finance.yahoo.com/v1/finance/premium/tradeideas/overlay",
+            "path": "https://query2.finance.yahoo.com/v1/finance/premium/tradeideas/overlay",  # noqa
             "response_field": "tradeIdeasOverlay",
             "query": {"ideaId": {"required": True, "default": None}},
         },
@@ -795,12 +796,12 @@ class _YahooFinance(object):
             "query": {"crumb": {"required": True, "default": None}},
         },
         "reports": {
-            "path": "https://query2.finance.yahoo.com/v1/finance/premium/researchreports/overlay",
+            "path": "https://query2.finance.yahoo.com/v1/finance/premium/researchreports/overlay",  # noqa
             "response_field": "researchReportsOverlay",
             "query": {"reportId": {"required": True, "default": None}},
         },
         "value_analyzer": {
-            "path": "https://query2.finance.yahoo.com/ws/value-analyzer/v1/finance/premium/valueAnalyzer/portal",
+            "path": "https://query2.finance.yahoo.com/ws/value-analyzer/v1/finance/premium/valueAnalyzer/portal",  # noqa
             "response_field": "finance",
             "query": {
                 "symbols": {"required": True, "default": None},
@@ -808,7 +809,7 @@ class _YahooFinance(object):
             },
         },
         "value_analyzer_drilldown": {
-            "path": "https://query2.finance.yahoo.com/ws/value-analyzer/v1/finance/premium/valueAnalyzer",
+            "path": "https://query2.finance.yahoo.com/ws/value-analyzer/v1/finance/premium/valueAnalyzer",  # noqa
             "response_field": "finance",
             "query": {
                 "symbol": {"required": True, "default": None},
@@ -818,7 +819,7 @@ class _YahooFinance(object):
             },
         },
         "technical_events": {
-            "path": "https://query2.finance.yahoo.com/ws/finance-technical-events/v1/finance/premium/technicalevents",
+            "path": "https://query2.finance.yahoo.com/ws/finance-technical-events/v1/finance/premium/technicalevents",  # noqa
             "response_field": "technicalEvents",
             "query": {
                 "symbol": {"required": True, "default": None},
@@ -833,6 +834,7 @@ class _YahooFinance(object):
             "query": {"symbols": {"required": True, "default": None}},
         },
     }
+    # pylint: enable=line-too-long
 
     _VIZ_CONFIG = {
         "report": {
@@ -1018,7 +1020,9 @@ class _YahooFinance(object):
             )
         self.session = setup_session(self.session, self._setup_url)
 
-    def _chunk_symbols(self, key, params={}, chunk=None, **kwargs):
+    def _chunk_symbols(self, key, params=None, chunk=None, **kwargs):
+        if params is None:
+            params = {}
         current_symbols = self.symbols
         all_data = [] if kwargs.get("list_result") else {}
         chunk = chunk or self.CHUNK
@@ -1028,8 +1032,10 @@ class _YahooFinance(object):
             if isinstance(data, str):
                 self._symbols = current_symbols
                 return data
-            all_data.extend(data) if isinstance(all_data, list) else all_data.update(
-                data
+            (
+                all_data.extend(data)
+                if isinstance(all_data, list)
+                else all_data.update(data)
             )
         self.symbols = current_symbols
         return all_data
@@ -1090,7 +1096,9 @@ class _YahooFinance(object):
                 obj[k] = v
         return obj
 
-    def _get_data(self, key, params={}, **kwargs):
+    def _get_data(self, key, params=None, **kwargs):
+        if params is None:
+            params = {}
         config = self._CONFIG[key]
         params = self._construct_params(config, params)
         urls = self._construct_urls(config, params, **kwargs)

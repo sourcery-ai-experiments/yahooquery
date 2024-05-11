@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "yahooquery"
-version = "2.3.8"
+version = "2.3.7r2"
 description = "Python wrapper for an unofficial Yahoo Finance API"
 authors = ["Doug Guthrie <douglas.p.guthrie@gmail.com>"]
 documentation = "https://yahooquery.dpguthrie.com"
@@ -9,7 +9,7 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.8.1,<4.0"
+python = "^3.8.1"
 requests = "^2.31.0"
 pandas = "^2.0.3"
 requests-futures = "^1.0.1"
