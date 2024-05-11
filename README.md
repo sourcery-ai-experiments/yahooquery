@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 <p align="center">
     <a href="#"><img src="docs/docs/img/full.png"></a>
 </p>
@@ -7,22 +8,11 @@
     <em>Forked by Ruin2121</em>
 </p>
 <p align="center">
-    <a href="https://codecov.io/gh/Ruin2121/yahooquery" > 
-        <img src="https://codecov.io/gh/Ruin2121/yahooquery/graph/badge.svg?token=BWHE5GCW8T"/> 
+    <a href="https://codecov.io/gh/Ruin2121/yahooquery" >
+        <img src="https://codecov.io/gh/Ruin2121/yahooquery/graph/badge.svg?token=BWHE5GCW8T"/>
     </a>
 </p>
-
----
-
-**Documentation**: <a target="_blank" href="https://yahooquery.dpguthrie.com">https://yahooquery.dpguthrie.com</a>
-
-**Interactive Demo**: <a target="_blank" href="https://yahooquery.streamlit.app/">https://yahooquery.streamlit.app/</a>
-
-**Source Code**: <a target="_blank" href="https://github.com/dpguthrie/yahooquery">https://github.com/dpguthrie/yahooquery</a>
-
-**Blog Post**: <a target="_blank" href="https://towardsdatascience.com/the-unofficial-yahoo-finance-api-32dcf5d53df">https://towardsdatascience.com/the-unofficial-yahoo-finance-api-32dcf5d53df</a>
-
----
+<!-- markdownlint-restore -->
 
 ## Overview
 
@@ -51,16 +41,16 @@ Python 2.7, 3.5+
 
 ## Installation
 
+For standard installation:
+
+```bash
+pip install "yahooquery @ git+https://github.com/Ruin2121/yahooquery.git@r2.3.8"
+```
+
 If you're a Yahoo Finance premium subscriber and would like to retrieve data available through your subscription, do the following:
 
 ```bash
-pip install yahooquery[premium]
-```
-
-Otherwise, omit the premium argument:
-
-```bash
-pip install yahooquery
+pip install "yahooquery[premium] @ git+https://github.com/Ruin2121/yahooquery.git@r2.3.8"
 ```
 
 ## Example
