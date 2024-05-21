@@ -8,8 +8,11 @@
     <em>Forked by Ruin2121</em>
 </p>
 <p align="center">
-    <a href="https://codecov.io/gh/Ruin2121/yahooquery" >
+    <a href="https://codecov.io/gh/Ruin2121/yahooquery">
         <img src="https://codecov.io/gh/Ruin2121/yahooquery/graph/badge.svg?token=BWHE5GCW8T"/>
+    </a>
+    <a href="https://sourcery.ai">
+        <img src="https://img.shields.io/badge/Sourcery-enabled-brightgreen">
     </a>
 </p>
 <!-- markdownlint-restore -->
@@ -27,7 +30,7 @@ Some features of yahooquery:
 
 ## Requirements
 
-Python 2.7, 3.5+
+Python 3.8+
 
 - [Pandas](https://pandas.pydata.org) - Fast, powerful, flexible and easy to use open source data analysis and manipulation tool
 - [Requests](https://requests.readthedocs.io/en/master/) - The elegant and simple HTTP library for Python, built for human beings.
@@ -44,13 +47,13 @@ Python 2.7, 3.5+
 For standard installation:
 
 ```bash
-pip install "yahooquery @ git+https://github.com/Ruin2121/yahooquery.git@2.3.7r2"
+pip install "yahooquery @ git+https://github.com/Ruin2121/yahooquery.git@2.3.7r3"
 ```
 
 If you're a Yahoo Finance premium subscriber and would like to retrieve data available through your subscription, do the following:
 
 ```bash
-pip install "yahooquery[premium] @ git+https://github.com/Ruin2121/yahooquery.git@2.3.7r2"
+pip install "yahooquery[premium] @ git+https://github.com/Ruin2121/yahooquery.git@2.3.7r3"
 ```
 
 ## Example
