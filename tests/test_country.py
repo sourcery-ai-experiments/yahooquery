@@ -3,7 +3,6 @@ import pytest
 from yahooquery import Ticker
 from yahooquery.utils.countries import COUNTRIES
 
-
 TICKERS = [Ticker("aapl", country="brazil")]
 
 

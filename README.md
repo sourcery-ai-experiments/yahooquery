@@ -14,6 +14,9 @@
     <a href="https://sourcery.ai">
         <img src="https://img.shields.io/badge/Sourcery-enabled-brightgreen">
     </a>
+    <a href="https://github.com/astral-sh/ruff">
+        <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json" alt="Ruff" style="max-width:100%;">
+    </a>
 </p>
 <!-- markdownlint-restore -->
 
@@ -47,13 +50,13 @@ Python 3.8+
 For standard installation:
 
 ```bash
-pip install "yahooquery @ git+https://github.com/Ruin2121/yahooquery.git@2.3.7r3"
+pip install "yahooquery @ git+https://github.com/Ruin2121/yahooquery.git@2.3.7r4"
 ```
 
 If you're a Yahoo Finance premium subscriber and would like to retrieve data available through your subscription, do the following:
 
 ```bash
-pip install "yahooquery[premium] @ git+https://github.com/Ruin2121/yahooquery.git@2.3.7r3"
+pip install "yahooquery[premium] @ git+https://github.com/Ruin2121/yahooquery.git@2.3.7r4"
 ```
 
 ## Example

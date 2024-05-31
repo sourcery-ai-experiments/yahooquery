@@ -1,8 +1,7 @@
 """Python interface to unofficial Yahoo Finance API endpoints"""
 
-# pylint: disable=invalid-name, wrong-import-position
 name = "yahooquery"
-__version__ = "2.3.7r2"
+__version__ = "2.3.7r4"
 
 from .misc import (  # noqa
     get_currencies,

@@ -10,9 +10,8 @@ import requests
 from bs4 import BeautifulSoup
 from requests.adapters import HTTPAdapter
 from requests.exceptions import ConnectionError, RetryError, SSLError
-from requests.packages.urllib3.util.retry import Retry
 from requests_futures.sessions import FuturesSession
-from urllib3.exceptions import MaxRetryError
+from urllib3.util.retry import Retry
 
 logger = logging.getLogger(__name__)
 

@@ -1,15 +1,8 @@
-# stdlib
 import re
+from urllib import parse
 
 from .base import _YahooFinance
 from .utils.screeners import SCREENERS
-
-try:
-    # stdlib
-    from urllib import parse
-except ImportError:
-    # third party
-    import urlparse as parse
 
 
 class Screener(_YahooFinance):
@@ -21,17 +14,16 @@ class Screener(_YahooFinance):
         #     self._symbols = convert_to_list(kwargs.get('symbols'))
 
     def _construct_params(self, config, params):
-        new_params = {}
         optional_params = [
             k
             for k in config["query"]
             if not config["query"][k]["required"]
             and config["query"][k]["default"] is not None
         ]
-        for optional in optional_params:
-            new_params.update(
-                {optional: params.get(optional, config["query"][optional]["default"])}
-            )
+        new_params = {
+            optional: params.get(optional, config["query"][optional]["default"])
+            for optional in optional_params
+        }
         new_params.update(self.default_query_params)
         new_params = {
             k: str(v).lower() if v is True or v is False else v
@@ -45,8 +37,7 @@ class Screener(_YahooFinance):
     def _get_symbol(self, response, params, **kwargs):
         query_params = dict(parse.parse_qsl(parse.urlsplit(response.url).query))
         screener_id = query_params["scrIds"]
-        key = next((k for k in SCREENERS if SCREENERS[k]["id"] == screener_id))
-        return key
+        return next((k for k in SCREENERS if SCREENERS[k]["id"] == screener_id))
 
     def _check_screen_ids(self, screen_ids):
         all_screeners = list(SCREENERS.keys())

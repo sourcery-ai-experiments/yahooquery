@@ -11,18 +11,24 @@ BASE_URL = "https://query2.finance.yahoo.com"
 
 
 def _make_request(
-    url, response_field=None, country=None, method="get", params={}, data=None, **kwargs
+    url,
+    response_field=None,
+    country=None,
+    method="get",
+    params=None,
+    data=None,
+    **kwargs,
 ):
+    if params is None:
+        params = {}
     if country:
         country = country.lower()
         try:
             params.update(COUNTRIES[country])
-        except KeyError:
+        except KeyError as e:
             raise KeyError(
-                "{} is not a valid option.  Valid options include {}".format(
-                    country, ", ".join(sorted(COUNTRIES.keys()))
-                )
-            )
+                f'{country} is not a valid option.  Valid options include {", ".join(sorted(COUNTRIES.keys()))}'
+            ) from e
     setup_url = kwargs.pop("setup_url", os.getenv("YF_SETUP_URL", None))
     session = initialize_session(**kwargs)
     session = setup_session(session, setup_url)
@@ -70,7 +76,7 @@ def search(
 
 def get_currencies():
     """Get a list of currencies"""
-    url = "{}/v1/finance/currencies".format(BASE_URL)
+    url = f"{BASE_URL}/v1/finance/currencies"
     return _make_request(url, response_field="currencies", country="United States")
 
 
@@ -94,7 +100,7 @@ def get_market_summary(country="United States"):
     -------
 
     """
-    url = "{}/v6/finance/quote/marketSummary".format(BASE_URL)
+    url = f"{BASE_URL}/v6/finance/quote/marketSummary"
     return _make_request(url, response_field="marketSummaryResponse", country=country)
 
 
@@ -109,11 +115,9 @@ def get_trending(country="United States"):
     """
     try:
         region = COUNTRIES[country.lower()]["region"]
-    except KeyError:
+    except KeyError as e:
         raise KeyError(
-            "{} is not a valid option.  Valid options include {}".format(
-                country, ", ".join(COUNTRIES.keys())
-            )
-        )
-    url = "{}/v1/finance/trending/{}".format(BASE_URL, region)
+            f'{country} is not a valid option.  Valid options include {", ".join(COUNTRIES.keys())}'
+        ) from e
+    url = f"{BASE_URL}/v1/finance/trending/{region}"
     return _make_request(url, response_field="finance", country=country)[0]

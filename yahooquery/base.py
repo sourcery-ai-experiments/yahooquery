@@ -4,6 +4,7 @@ import os
 import time
 from concurrent.futures import as_completed
 from datetime import datetime
+from urllib import parse
 
 # third party
 from requests_futures.sessions import FuturesSession
@@ -18,14 +19,6 @@ from yahooquery.utils import (
     setup_session,
 )
 from yahooquery.utils.countries import COUNTRIES
-
-try:
-    # stdlib
-    from urllib import parse
-except ImportError:
-    # third party
-    import urlparse as parse
-
 
 logger = logging.getLogger(__name__)
 
@@ -572,10 +565,9 @@ class _YahooFinance(object):
         ),
     }
 
-    # pylint: disable=line-too-long
     _CONFIG = {
         "yfp_fair_value": {
-            "path": "https://query2.finance.yahoo.com/ws/value-analyzer/v1/finance/premium/valueAnalyzer/multiquote",  # noqa
+            "path": "https://query2.finance.yahoo.com/ws/value-analyzer/v1/finance/premium/valueAnalyzer/multiquote",
             "response_field": "finance",
             "query": {
                 "formatted": {"required": False, "default": False},
@@ -597,7 +589,7 @@ class _YahooFinance(object):
             },
         },
         "quoteSummary": {
-            "path": "https://query2.finance.yahoo.com/v10/finance/quoteSummary/{symbol}",  # noqa
+            "path": "https://query2.finance.yahoo.com/v10/finance/quoteSummary/{symbol}",
             "response_field": "quoteSummary",
             "query": {
                 "formatted": {"required": False, "default": False},
@@ -609,7 +601,7 @@ class _YahooFinance(object):
             },
         },
         "fundamentals": {
-            "path": "https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/{symbol}",  # noqa
+            "path": "https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/{symbol}",
             "response_field": "timeseries",
             "query": {
                 "period1": {"required": True, "default": 493590046},
@@ -624,7 +616,7 @@ class _YahooFinance(object):
             },
         },
         "fundamentals_premium": {
-            "path": "https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/premium/timeseries/{symbol}",  # noqa
+            "path": "https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/premium/timeseries/{symbol}",
             "response_field": "timeseries",
             "query": {
                 "period1": {"required": True, "default": 493590046},
@@ -717,7 +709,7 @@ class _YahooFinance(object):
             "query": {"symbol": {"required": True, "default": None}},
         },
         "recommendations": {
-            "path": "https://query2.finance.yahoo.com/v6/finance/recommendationsbysymbol/{symbol}",  # noqa
+            "path": "https://query2.finance.yahoo.com/v6/finance/recommendationsbysymbol/{symbol}",
             "response_field": "finance",
             "query": {},
         },
@@ -730,7 +722,7 @@ class _YahooFinance(object):
             },
         },
         "premium_insights": {
-            "path": "https://query2.finance.yahoo.com/ws/insights/v2/finance/premium/insights",  # noqa
+            "path": "https://query2.finance.yahoo.com/ws/insights/v2/finance/premium/insights",
             "response_field": "finance",
             "query": {
                 "symbol": {"required": True, "default": None},
@@ -738,7 +730,7 @@ class _YahooFinance(object):
             },
         },
         "screener": {
-            "path": "https://query2.finance.yahoo.com/v1/finance/screener/predefined/saved",  # noqa
+            "path": "https://query2.finance.yahoo.com/v1/finance/screener/predefined/saved",
             "response_field": "finance",
             "query": {
                 "formatted": {"required": False, "default": False},
@@ -747,7 +739,7 @@ class _YahooFinance(object):
             },
         },
         "company360": {
-            "path": "https://query2.finance.yahoo.com/ws/finance-company-360/v1/finance/premium/company360",  # noqa
+            "path": "https://query2.finance.yahoo.com/ws/finance-company-360/v1/finance/premium/company360",
             "response_field": "finance",
             "premium": True,
             "query": {
@@ -772,7 +764,7 @@ class _YahooFinance(object):
             },
         },
         "premium_portal": {
-            "path": "https://query2.finance.yahoo.com/ws/portal/v1/finance/premium/portal",  # noqa
+            "path": "https://query2.finance.yahoo.com/ws/portal/v1/finance/premium/portal",
             "response_field": "finance",
             "query": {
                 "symbols": {"required": True, "default": None},
@@ -781,7 +773,7 @@ class _YahooFinance(object):
             },
         },
         "trade_ideas": {
-            "path": "https://query2.finance.yahoo.com/v1/finance/premium/tradeideas/overlay",  # noqa
+            "path": "https://query2.finance.yahoo.com/v1/finance/premium/tradeideas/overlay",
             "response_field": "tradeIdeasOverlay",
             "query": {"ideaId": {"required": True, "default": None}},
         },
@@ -796,12 +788,12 @@ class _YahooFinance(object):
             "query": {"crumb": {"required": True, "default": None}},
         },
         "reports": {
-            "path": "https://query2.finance.yahoo.com/v1/finance/premium/researchreports/overlay",  # noqa
+            "path": "https://query2.finance.yahoo.com/v1/finance/premium/researchreports/overlay",
             "response_field": "researchReportsOverlay",
             "query": {"reportId": {"required": True, "default": None}},
         },
         "value_analyzer": {
-            "path": "https://query2.finance.yahoo.com/ws/value-analyzer/v1/finance/premium/valueAnalyzer/portal",  # noqa
+            "path": "https://query2.finance.yahoo.com/ws/value-analyzer/v1/finance/premium/valueAnalyzer/portal",
             "response_field": "finance",
             "query": {
                 "symbols": {"required": True, "default": None},
@@ -809,7 +801,7 @@ class _YahooFinance(object):
             },
         },
         "value_analyzer_drilldown": {
-            "path": "https://query2.finance.yahoo.com/ws/value-analyzer/v1/finance/premium/valueAnalyzer",  # noqa
+            "path": "https://query2.finance.yahoo.com/ws/value-analyzer/v1/finance/premium/valueAnalyzer",
             "response_field": "finance",
             "query": {
                 "symbol": {"required": True, "default": None},
@@ -819,7 +811,7 @@ class _YahooFinance(object):
             },
         },
         "technical_events": {
-            "path": "https://query2.finance.yahoo.com/ws/finance-technical-events/v1/finance/premium/technicalevents",  # noqa
+            "path": "https://query2.finance.yahoo.com/ws/finance-technical-events/v1/finance/premium/technicalevents",
             "response_field": "technicalEvents",
             "query": {
                 "symbol": {"required": True, "default": None},
@@ -834,7 +826,6 @@ class _YahooFinance(object):
             "query": {"symbols": {"required": True, "default": None}},
         },
     }
-    # pylint: enable=line-too-long
 
     _VIZ_CONFIG = {
         "report": {
@@ -971,9 +962,7 @@ class _YahooFinance(object):
     def country(self, country):
         if country.lower() not in COUNTRIES:
             raise ValueError(
-                "{} is not a valid country.  Valid countries include {}".format(
-                    country, ", ".join(COUNTRIES.keys())
-                )
+                f'{country} is not a valid country.  Valid countries include {", ".join(COUNTRIES.keys())}'
             )
         self._country = country.lower()
         self._country_params = COUNTRIES[self._country]
@@ -1085,13 +1074,11 @@ class _YahooFinance(object):
                 else:
                     obj[k] = self._format_data(v, dates)
             elif isinstance(v, list):
-                if len(v) == 0:
+                if len(v) == 0 or not isinstance(v[0], dict):
                     obj[k] = v
-                elif isinstance(v[0], dict):
+                else:
                     for i, list_item in enumerate(v):
                         obj[k][i] = self._format_data(list_item, dates)
-                else:
-                    obj[k] = v
             else:
                 obj[k] = v
         return obj
@@ -1104,11 +1091,11 @@ class _YahooFinance(object):
         urls = self._construct_urls(config, params, **kwargs)
         response_field = config["response_field"]
         try:
-            if isinstance(self.session, FuturesSession):
-                data = self._async_requests(response_field, urls, params, **kwargs)
-            else:
-                data = self._sync_requests(response_field, urls, params, **kwargs)
-            return data
+            return (
+                self._async_requests(response_field, urls, params, **kwargs)
+                if isinstance(self.session, FuturesSession)
+                else self._sync_requests(response_field, urls, params, **kwargs)
+            )
         except ValueError:
             return {"error": "HTTP 404 Not Found.  Please try again"}
 
@@ -1153,7 +1140,7 @@ class _YahooFinance(object):
     def _construct_urls(self, config, params, **kwargs):
         """Construct URL requests"""
         if kwargs.get("method") == "post":
-            urls = [
+            return [
                 self.session.post(
                     url=config["path"], params=params, json=kwargs.get("payload")
                 )
@@ -1164,23 +1151,22 @@ class _YahooFinance(object):
                 if isinstance(self.session, FuturesSession)
                 else tqdm(params, disable=not self.progress)
             )
-            urls = [self.session.get(url=config["path"], params=p) for p in ls]
+            return [self.session.get(url=config["path"], params=p) for p in ls]
         elif "symbols" in config["query"]:
             params.update({"symbols": ",".join(self._symbols)})
-            urls = [self.session.get(url=config["path"], params=params)]
+            return [self.session.get(url=config["path"], params=params)]
         else:
             ls = (
                 self._symbols
                 if isinstance(self.session, FuturesSession)
                 else tqdm(self._symbols, disable=not self.progress)
             )
-            urls = [
+            return [
                 self.session.get(
                     url=config["path"].format(**{"symbol": symbol}), params=params
                 )
                 for symbol in ls
             ]
-        return urls
 
     def _async_requests(self, response_field, urls, params, **kwargs):
         data = {}
@@ -1214,9 +1200,7 @@ class _YahooFinance(object):
             if response[response_field]["error"]:
                 error = response[response_field]["error"]
                 return error.get("description")
-            if not response[response_field]["result"]:
-                return "No data found"
-            return response
+            return response if response[response_field]["result"] else "No data found"
         except KeyError:
             if "finance" in response:
                 if response["finance"].get("error"):
