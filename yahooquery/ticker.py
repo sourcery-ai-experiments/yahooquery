@@ -1307,11 +1307,15 @@ class Ticker(_YahooFinance):
     def _historical_data_to_dataframe(self, data, params, adj_timezone):
         d = {}
         for symbol in self._symbols:
-            if "timestamp" in data[symbol]:
-                daily = params["interval"][-1] not in ["m", "h"]
-                d[symbol] = _history_dataframe(data[symbol], daily, adj_timezone)
-            else:
-                d[symbol] = data[symbol]
+            # TODO: There may occasionaly be a KeyError here, need to investigate
+            try:
+                if "timestamp" in data[symbol]:
+                    daily = params["interval"][-1] not in ["m", "h"]
+                    d[symbol] = _history_dataframe(data[symbol], daily, adj_timezone)
+                else:
+                    d[symbol] = data[symbol]
+            except KeyError:
+                continue
         d = {k: v for k, v in d.items() if isinstance(v, pd.DataFrame)}
         try:
             df = pd.concat(d, names=["symbol", "date"], sort=False)

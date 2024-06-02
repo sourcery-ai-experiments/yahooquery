@@ -925,14 +925,14 @@ class _YahooFinance(object):
         },
     }
 
-    PERIODS = _CONFIG["chart"]["query"]["range"]["options"]
-    INTERVALS = _CONFIG["chart"]["query"]["interval"]["options"]
-    MODULES = _CONFIG["quoteSummary"]["query"]["modules"]["options"]
+    PERIODS: list[str] = _CONFIG["chart"]["query"]["range"]["options"]
+    INTERVALS: list[str] = _CONFIG["chart"]["query"]["interval"]["options"]
+    MODULES: list[str] = _CONFIG["quoteSummary"]["query"]["modules"]["options"]
 
-    def __init__(self, **kwargs):
-        self.country = kwargs.pop("country", "united states").lower()
-        self.formatted = kwargs.pop("formatted", False)
-        self.progress = kwargs.pop("progress", False)
+    def __init__(self, **kwargs) -> None:
+        self.country: str = kwargs.pop("country", "united states").lower()
+        self.formatted: bool = kwargs.pop("formatted", False)
+        self.progress: bool = kwargs.pop("progress", False)
         self.username = kwargs.pop("username", os.getenv("YF_USERNAME", None))
         self.password = kwargs.pop("password", os.getenv("YF_PASSWORD", None))
         self._setup_url = kwargs.pop("setup_url", os.getenv("YF_SETUP_URL", None))
@@ -944,22 +944,22 @@ class _YahooFinance(object):
         self.crumb = get_crumb(self.session)
 
     @property
-    def symbols(self):
+    def symbols(self) -> list[str]:
         """
         List of symbol(s) used to retrieve information
         """
         return self._symbols
 
     @symbols.setter
-    def symbols(self, symbols):
-        self._symbols = convert_to_list(symbols)
+    def symbols(self, symbols) -> None:
+        self._symbols: list[str] = convert_to_list(symbols)
 
     @property
-    def country(self):
+    def country(self) -> str:
         return self._country
 
     @country.setter
-    def country(self, country):
+    def country(self, country: str) -> None:
         if country.lower() not in COUNTRIES:
             raise ValueError(
                 f'{country} is not a valid country.  Valid countries include {", ".join(COUNTRIES.keys())}'
@@ -968,7 +968,7 @@ class _YahooFinance(object):
         self._country_params = COUNTRIES[self._country]
 
     @property
-    def default_query_params(self):
+    def default_query_params(self) -> dict[str, str]:
         """
         Dictionary containing default query parameters that are sent with
         each request.  The dictionary contains four keys:  lang, region,

@@ -1441,7 +1441,7 @@ def flatten_list(ls):
     return [item for sublist in ls for item in sublist]
 
 
-def convert_to_list(symbols, comma_split=False):
+def convert_to_list(symbols, comma_split=False) -> list[str]:
     if isinstance(symbols, str):
         if comma_split:
             return [x.strip() for x in symbols.split(",")]
