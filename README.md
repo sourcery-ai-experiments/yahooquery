@@ -33,7 +33,7 @@ Some features of yahooquery:
 
 ## Requirements
 
-Python 3.8+
+Python 3.9+
 
 - [Pandas](https://pandas.pydata.org) - Fast, powerful, flexible and easy to use open source data analysis and manipulation tool
 - [Requests](https://requests.readthedocs.io/en/master/) - The elegant and simple HTTP library for Python, built for human beings.
@@ -50,13 +50,13 @@ Python 3.8+
 For standard installation:
 
 ```bash
-pip install "yahooquery @ git+https://github.com/Ruin2121/yahooquery.git@2.3.7r5"
+pip install "yahooquery @ git+https://github.com/Ruin2121/yahooquery.git@2.3.7r6"
 ```
 
 If you're a Yahoo Finance premium subscriber and would like to retrieve data available through your subscription, do the following:
 
 ```bash
-pip install "yahooquery[premium] @ git+https://github.com/Ruin2121/yahooquery.git@2.3.7r5"
+pip install "yahooquery[premium] @ git+https://github.com/Ruin2121/yahooquery.git@2.3.7r6"
 ```
 
 ## Example
