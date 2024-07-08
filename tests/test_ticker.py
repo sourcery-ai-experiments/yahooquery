@@ -10,7 +10,9 @@ from yahooquery import Ticker
 from yahooquery.utils.__init__ import _history_dataframe
 
 TICKERS = [
-    Ticker("aapl", username=os.getenv("YFF_USERNAME"), password=os.getenv("YFF_PASSWORD")),
+    Ticker(
+        "aapl", username=os.getenv("YFF_USERNAME"), password=os.getenv("YFF_PASSWORD")
+    ),
     Ticker("aapl ^GSPC btcusd=x brk-b logo.is l&tfh.ns", asynchronous=True),
     Ticker("aaapl"),
     Ticker("hasgx"),
@@ -111,7 +113,9 @@ def test_modules(ticker, module):
     assert getattr(ticker, module) is not None
 
 
-@pytest.mark.parametrize("module, frequency", list(itertools.product(FINANCIALS, ["q", "a"])))
+@pytest.mark.parametrize(
+    "module, frequency", list(itertools.product(FINANCIALS, ["q", "a"]))
+)
 def test_financials(ticker, frequency, module):
     assert getattr(ticker, module)(frequency) is not None
 
@@ -122,12 +126,16 @@ def test_bad_financials_arg():
 
 
 def test_get_financial_data(ticker):
-    assert ticker.get_financial_data("GrossProfit NetIncome TotalAssets ForwardPeRatio") is not None
+    assert (
+        ticker.get_financial_data("GrossProfit NetIncome TotalAssets ForwardPeRatio")
+        is not None
+    )
 
 
 def test_p_get_financial_data(ticker):
     assert (
-        ticker.p_get_financial_data("GrossProfit NetIncome TotalAssets ForwardPeRatio") is not None
+        ticker.p_get_financial_data("GrossProfit NetIncome TotalAssets ForwardPeRatio")
+        is not None
     )
 
 
@@ -377,7 +385,9 @@ class TestHistoryDataframe:
         dti_hk = dti_utc.tz_convert(tz_hk)
         assert_index_equal(dti_hk, expected_hk)
         expected_hk_days = expected_oz_days  # same, both should map to next day
-        assert_index_equal(pd.Index(dti_hk.date + datetime.timedelta(1)), expected_hk_days)
+        assert_index_equal(
+            pd.Index(dti_hk.date + datetime.timedelta(1)), expected_hk_days
+        )
 
         yield (
             tss,
@@ -470,7 +480,9 @@ class TestHistoryDataframe:
         """
         indice = 11
         ts = tss[indice]
-        d = {str(ts): {"data": ts, "numerator": 3, "denominator": 1, "splitRatio": "3:1"}}
+        d = {
+            str(ts): {"data": ts, "numerator": 3, "denominator": 1, "splitRatio": "3:1"}
+        }
         expected = [3 if i == indice else float("nan") for i in range(14)]
         return d, expected
 
@@ -541,7 +553,9 @@ class TestHistoryDataframe:
         return df
 
     @pytest.fixture
-    def expected_daily_utc(self, timestamps_daily, quote, dividends_daily, splits_daily, adjclose):
+    def expected_daily_utc(
+        self, timestamps_daily, quote, dividends_daily, splits_daily, adjclose
+    ):
         """
         Expected return if timestamps interpreted with local tz as utc.
         """
@@ -552,7 +566,9 @@ class TestHistoryDataframe:
         yield df
 
     @pytest.fixture
-    def expected_daily_us(self, timestamps_daily, quote, dividends_daily, splits_daily, adjclose):
+    def expected_daily_us(
+        self, timestamps_daily, quote, dividends_daily, splits_daily, adjclose
+    ):
         """
         Expected return if timestamps interpreted with local tz as us.
         """
@@ -578,7 +594,9 @@ class TestHistoryDataframe:
         yield df
 
     @pytest.fixture
-    def expected_daily_oz(self, timestamps_daily, quote, dividends_daily, splits_daily, adjclose):
+    def expected_daily_oz(
+        self, timestamps_daily, quote, dividends_daily, splits_daily, adjclose
+    ):
         """
         Expected return if timestamps interpreted with local tz as oz.
         """
@@ -589,7 +607,9 @@ class TestHistoryDataframe:
         yield df
 
     @pytest.fixture
-    def expected_daily_hk(self, timestamps_daily, quote, dividends_daily, splits_daily, adjclose):
+    def expected_daily_hk(
+        self, timestamps_daily, quote, dividends_daily, splits_daily, adjclose
+    ):
         """
         Expected return if timestamps interpreted with local tz as oz.
         """
@@ -663,7 +683,9 @@ class TestHistoryDataframe:
         rtrn = f(data, adj_timezone)
         assert_frame_equal(rtrn, expected)
 
-    def test_live_indice(self, timestamps_daily, expected_daily_us_bare, tz_us, utc, quote):
+    def test_live_indice(
+        self, timestamps_daily, expected_daily_us_bare, tz_us, utc, quote
+    ):
         """
         Test daily data with live indice.
         """
@@ -689,11 +711,15 @@ class TestHistoryDataframe:
         # verify live indice has local timezone when adj_timezone True
         rtrn = _history_dataframe(data, daily=True, adj_timezone=True)
         expected_li = pd.Timestamp("2022-11-23 14:31", tz=tz_us).to_pydatetime()
-        expected_index = expected_index[:-1].insert(len(expected_index) - 1, expected_li)
+        expected_index = expected_index[:-1].insert(
+            len(expected_index) - 1, expected_li
+        )
         expected_df.index = expected_index
         assert_frame_equal(rtrn, expected_df)
 
-    def test_duplicate_live_indice(self, timestamps_daily, expected_daily_us_bare, tz_us, quote):
+    def test_duplicate_live_indice(
+        self, timestamps_daily, expected_daily_us_bare, tz_us, quote
+    ):
         """
         Test live indice removed if day already represented.
         """
@@ -805,12 +831,16 @@ class TestHistoryDataframe:
         yield self.get_splits(timestamps_intraday[0])
 
     @pytest.fixture
-    def expected_intraday(self, timestamps_intraday, quote, dividends_intraday, splits_intraday):
+    def expected_intraday(
+        self, timestamps_intraday, quote, dividends_intraday, splits_intraday
+    ):
         """
         Expected return for intraday timestamps.
         """
         _, expected_utc = timestamps_intraday
-        df = self.create_expected(expected_utc, quote[1], dividends_intraday[1], splits_intraday[1])
+        df = self.create_expected(
+            expected_utc, quote[1], dividends_intraday[1], splits_intraday[1]
+        )
         # hard coded sanity check on specific row
         i = 8
         expected = pd.Series(
