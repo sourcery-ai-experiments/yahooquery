@@ -103,7 +103,9 @@ class Ticker(_YahooFinance):
         if len(modules) == 1:
             kwargs["addl_key"] = modules[0]
         data = self._get_data(key="quoteSummary", params=params, **kwargs)
-        dates = flatten_list([self._MODULES_DICT[module]["convert_dates"] for module in modules])
+        dates = flatten_list(
+            [self._MODULES_DICT[module]["convert_dates"] for module in modules]
+        )
         return data if self.formatted else self._format_data(data, dates)
 
     def _quote_summary_dataframe(self, module, **kwargs):
@@ -128,7 +130,9 @@ class Ticker(_YahooFinance):
                 pass
             else:
                 if kwargs.get("from_dict"):
-                    df = pd.DataFrame([(k, v) for d in final_data for k, v in d.items()])
+                    df = pd.DataFrame(
+                        [(k, v) for d in final_data for k, v in d.items()]
+                    )
                     df.set_index(0, inplace=True)
                     df.columns = [symbol]
                 else:
@@ -159,7 +163,9 @@ class Ticker(_YahooFinance):
         -----
         Only returns JSON
         """
-        return self._quote_summary(self._CONFIG["quoteSummary"]["query"]["modules"]["options"])
+        return self._quote_summary(
+            self._CONFIG["quoteSummary"]["query"]["modules"]["options"]
+        )
 
     def get_modules(self, modules):
         """
@@ -496,10 +502,14 @@ class Ticker(_YahooFinance):
         key = "fundamentals_premium" if premium else "fundamentals"
         types = types or self._CONFIG[key]["query"]["type"]["options"][financials_type]
         if trailing:
-            prefixed_types = [f"{prefix}{t}" for t in types] + [f"trailing{t}" for t in types]
+            prefixed_types = [f"{prefix}{t}" for t in types] + [
+                f"trailing{t}" for t in types
+            ]
         else:
             prefixed_types = [f"{prefix}{t}" for t in types]
-        data = self._get_data(key, {"type": ",".join(prefixed_types)}, **{"list_result": True})
+        data = self._get_data(
+            key, {"type": ",".join(prefixed_types)}, **{"list_result": True}
+        )
         dataframes = []
         try:
             for k in data.keys():
@@ -550,7 +560,9 @@ class Ticker(_YahooFinance):
                 df["symbol"] = symbol
             else:
                 df["symbol"] = symbol
-                df["parentTopics"] = df["parentTopics"].apply(lambda x: x[0].get("topicLabel"))
+                df["parentTopics"] = df["parentTopics"].apply(
+                    lambda x: x[0].get("topicLabel")
+                )
             return df
 
     def all_financial_data(self, frequency="a"):
@@ -1011,7 +1023,9 @@ class Ticker(_YahooFinance):
         types = flatten_list(
             [self.FUNDAMENTALS_OPTIONS[option] for option in self.FUNDAMENTALS_OPTIONS]
         )
-        return self._financials("cash_flow", frequency, premium=True, types=types, trailing=False)
+        return self._financials(
+            "cash_flow", frequency, premium=True, types=types, trailing=False
+        )
 
     def p_get_financial_data(self, types, frequency="a", trailing=True):
         """
@@ -1038,7 +1052,9 @@ class Ticker(_YahooFinance):
         """
         if not isinstance(types, list):
             types = re.findall(r"[a-zA-Z]+", types)
-        return self._financials("cash_flow", frequency, True, types=types, trailing=trailing)
+        return self._financials(
+            "cash_flow", frequency, True, types=types, trailing=trailing
+        )
 
     def p_balance_sheet(self, frequency="a", trailing=True):
         """Balance Sheet
@@ -1064,7 +1080,9 @@ class Ticker(_YahooFinance):
         -------
         pandas.DataFrame
         """
-        return self._financials("balance_sheet", frequency, premium=True, trailing=trailing)
+        return self._financials(
+            "balance_sheet", frequency, premium=True, trailing=trailing
+        )
 
     def p_cash_flow(self, frequency="a", trailing=True):
         """Cash Flow
@@ -1126,7 +1144,9 @@ class Ticker(_YahooFinance):
         -------
         pandas.DataFrame
         """
-        return self._financials("income_statement", frequency, premium=True, trailing=trailing)
+        return self._financials(
+            "income_statement", frequency, premium=True, trailing=trailing
+        )
 
     @property
     def p_company_360(self):
@@ -1190,9 +1210,9 @@ class Ticker(_YahooFinance):
         if "dividends" in df:
             return df[df["dividends"] != 0].loc[:, ["dividends"]]
 
-        return pd.DataFrame(columns=["symbol", "date", "dividends"]).set_index(["symbol", "date"])[
-            "dividends"
-        ]
+        return pd.DataFrame(columns=["symbol", "date", "dividends"]).set_index(
+            ["symbol", "date"]
+        )["dividends"]
 
     def history(
         self,
@@ -1268,13 +1288,17 @@ class Ticker(_YahooFinance):
     def _history_1m(self, adj_timezone=True, _adj_ohlc=False):
         params = {"interval": "1m"}
         today = datetime.now()
-        dates = [convert_to_timestamp((today - timedelta(7 * x)).date()) for x in range(5)]
+        dates = [
+            convert_to_timestamp((today - timedelta(7 * x)).date()) for x in range(5)
+        ]
         dataframes = []
         for i in range(len(dates) - 1):
             params["period1"] = dates[i + 1]
             params["period2"] = dates[i]
             data = self._get_data("chart", params)
-            dataframes.append(self._historical_data_to_dataframe(data, params, adj_timezone))
+            dataframes.append(
+                self._historical_data_to_dataframe(data, params, adj_timezone)
+            )
         df = pd.concat(dataframes, sort=True)
         df.sort_values(by=["symbol", "date"], inplace=True)
         df.fillna(value=0, inplace=True)
@@ -1319,7 +1343,9 @@ class Ticker(_YahooFinance):
         for symbol in self._symbols:
             with contextlib.suppress(TypeError):
                 if data[symbol]["options"]:
-                    dataframes.append(self._option_dataframe(data[symbol]["options"], symbol))
+                    dataframes.append(
+                        self._option_dataframe(data[symbol]["options"], symbol)
+                    )
         if dataframes:
             df = pd.concat(dataframes, sort=False)
             df.set_index(["symbol", "expiration", "optionType"], inplace=True)
